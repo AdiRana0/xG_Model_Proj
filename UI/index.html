@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <script src="script.js" defer></script> 
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <h1>xG Calculator</h1>
+    <p>xG Model trained on every shot from the 2015/16 Premier League season.</p>
+    <p> Enter the required shot information to see the calculated xG value </p>
+
+    <div class="outer-container">
+
+        <canvas id="field" width="640" height="420"></canvas>
+
+        <div class="output-fields">
+            <p class="stat-label">Distance: <span id="distance">0.0</span>m</p>
+            <p class="stat-label">Angle: <span id="angle">0.0</span></p>
+
+            <p class="pred-label">Predicted xG: <span id="xG">0.00</span></p>
+
+            <button id="predButton">Calculate</button>
+        </div>
+
+        <div class="input-fields">
+            <div class="input-group">
+                <label>
+                    <input type="checkbox" id="OneOnOne"> One on One
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input type="checkbox" id="FirstTime"> First-Time Finish
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input type="checkbox" id="UnderPressure"> Under Pressure
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label for="shotTechnique">Shot Technique:</label>
+                <select id="shotTechnique">
+                    <option value="Normal">Normal</option>
+                    <option value="Diving Header">Diving Header</option>
+                    <option value="Half Volley">Half-Volley</option>
+                    <option value="Volley">Volley</option>
+                    <option value="Lob">Chip</option>
+                    <option value="Overhead Kick">Overhead Kick</option>
+                    <option value="Backheel">Backheel</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="shotType">Shot Type:</label>
+                <select id="shotType">
+                    <option value="Open Play">Open Play</option>
+                    <option value="Penalty">Penalty</option>
+                    <option value="Free Kick">Freekick</option>
+                    <option value="Corner">Corner</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="bodyPart">Body Part:</label>
+                <select id="bodyPart">
+                    <option value="Right Foot">Right Foot</option>
+                    <option value="Left Foot">Left Foot</option>
+                    <option value="Head">Head</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>   
+    </div>    
+
+    </canvas>
+</body>
+
+</html>

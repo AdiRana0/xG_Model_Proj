@@ -1,0 +1,14 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Large/regeneratable data files
+data/raw_shots.csv
+data/Xy.pkl
+
+# OS/editor junk
+.DS_Store
+.vscode/
