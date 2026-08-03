@@ -67,7 +67,6 @@ shots_DF['is_goal'] = shots_DF['shot_outcome'].apply(is_goal)
 
 # --- CONVERT BOOL FLAGS TO BINARY ---
 
-
 bool_flags = ['under_pressure', 'shot_first_time', 'shot_one_on_one']
 
 for col in bool_flags:

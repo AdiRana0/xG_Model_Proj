@@ -12,7 +12,6 @@ import pandas as pd
 # --- RETRIEVE FEATURES/LABEL ---
 
 X, y = joblib.load('data/Xy.pkl')
-# print('Loaded features (X) and label (y)')
 
 
 # --- TRAIN/TEST SPLIT ---
@@ -45,30 +44,30 @@ print("LR — AUC:", roc_auc_score(y_test, LR_probabilities))
 
 
 # --- MODEL 2: XGBoost
-# Tune XGB model; use best combo of following parameters, derived using grid search
+# Tuned XGB model; uses best combo of following parameters, derived using grid search
 
-# parameter_grid = {
-#     'max_depth': [4],
-#     'learning_rate': [0.05, 0.075, 0.1, 0.125, 0.15],
-#     'n_estimators': [50],
-#     'min_child_weight': [1]
-# }
+parameter_grid = {
+    'max_depth': [4],
+    'learning_rate': [0.05, 0.075, 0.1, 0.125, 0.15],
+    'n_estimators': [50],
+    'min_child_weight': [1]
+}
 
-# XGB_est = XGBClassifier(eval_metric='logloss', random_state=26)
+XGB_est = XGBClassifier(eval_metric='logloss', random_state=26)
 
-# grid_search = GridSearchCV(estimator=XGB_est, param_grid=parameter_grid, scoring='neg_log_loss', cv=5, n_jobs=-1, verbose=1)
+grid_search = GridSearchCV(estimator=XGB_est, param_grid=parameter_grid, scoring='neg_log_loss', cv=5, n_jobs=-1, verbose=1)
 
-# grid_search.fit(X_train, y_train)
+grid_search.fit(X_train, y_train)
 
-# print("Best parameters:", grid_search.best_params_)
-# print("Best CV log loss:", -grid_search.best_score_)
+print("Best parameters:", grid_search.best_params_)
+print("Best CV log loss:", -grid_search.best_score_)
 
-# XGB = grid_search.best_estimator_
+XGB = grid_search.best_estimator_
 
-# XGB_probabilities = XGB.predict_proba(X_test)[:, 1]
+XGB_probabilities = XGB.predict_proba(X_test)[:, 1]
 
-# print("XGBoost — Log Loss:", log_loss(y_test, XGB_probabilities))
-# print("XGBoost — AUC:", roc_auc_score(y_test, XGB_probabilities))
+print("XGBoost — Log Loss:", log_loss(y_test, XGB_probabilities))
+print("XGBoost — AUC:", roc_auc_score(y_test, XGB_probabilities))
 
 
 # --- SAVE MODEL ---
@@ -77,6 +76,3 @@ joblib.dump(LR, 'data/xg_model_v1.pkl')
 joblib.dump(sc, 'data/scaler.pkl')
 
 print('Model saved')
-
-coef_DF = pd.DataFrame({'x': X_train.columns, 'w': LR.coef_[0]})
-print(coef_DF.sort_values('w', ascending=False))
